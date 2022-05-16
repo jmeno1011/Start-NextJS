@@ -23,6 +23,14 @@ const NavBar = () => {
           About
         </a>
       </Link>
+      <style jsx>{`
+        nav {
+          background-color: lightgray;
+        }
+        a {
+          color: blue;
+        }
+      `}</style>
     </nav>
   );
 };

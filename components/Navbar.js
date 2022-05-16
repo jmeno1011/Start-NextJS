@@ -7,28 +7,24 @@ const NavBar = () => {
   return (
     <nav>
       <Link href={"/"}>
-        <a
-          className={
-            (styles.link, router.pathname === "/" ? styles.active : "")
-          }
-        >
+        <a className={(styles.link, router.pathname === "/" ? "active" : "")}>
           Home
         </a>
       </Link>
       <Link href={"/about"}>
         <a
           className={`${styles.link}
-            ${router.pathname === "/about" ? styles.active : ""}`}
+            ${router.pathname === "/about" ? "active" : ""}`}
         >
           About
         </a>
       </Link>
       <style jsx>{`
-        nav {
-          background-color: lightgray;
-        }
         a {
-          color: blue;
+          text-decoration: none;
+        }
+        .active {
+          color: tomato;
         }
       `}</style>
     </nav>

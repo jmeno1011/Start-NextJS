@@ -1,11 +1,11 @@
+import Layout from "../components/Layout";
 import NavBar from "../components/Navbar";
 
 const App = ({ Component, pageProps }) => {
   return (
-    <>
-      <NavBar />
+    <Layout>
       <Component {...pageProps} />
-    </>
+    </Layout>
   );
 };
 

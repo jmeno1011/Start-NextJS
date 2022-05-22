@@ -13,14 +13,14 @@ function HomePage({ results }) {
   // useEffect(() => {
   //   fetchMovie();
   // }, []);
-
+  console.log(results);
   return (
     <div className="container">
       <Seo title={"Home"} />
       {!results && <h4>Loading...</h4>}
       {results?.map((value) => (
         <div className="movie" key={value.id}>
-          <img scr={`https://image.tmdb.org/t/p/w500${value.poster_path}`} />
+          <img src={`https://image.tmdb.org/t/p/w500${value.poster_path}`} />
           <h4>{value.original_title}</h4>
         </div>
       ))}
@@ -45,9 +45,6 @@ function HomePage({ results }) {
           text-align: center;
         }
       `}</style>
-      <img
-        scr={`https://image.tmdb.org/t/p/w500/6DrHO1jr3qVrViUO6s6kFiAGM7.jpg`}
-      />
     </div>
   );
 }

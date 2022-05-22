@@ -6,6 +6,7 @@ function HomePage() {
 
   const fetchMovie = async () => {
     const { results } = await (await fetch("/api/movies")).json();
+    console.log(results);
     setMovies(results);
   };
 
@@ -14,11 +15,12 @@ function HomePage() {
   }, []);
 
   return (
-    <div>
+    <div className="container">
       <Seo title={"Home"} />
       {!movies && <h4>Loading...</h4>}
       {movies?.map((value) => (
-        <div key={value.id}>
+        <div className="movie" key={value.id}>
+          <img scr={`https://image.tmdb.org/t/p/w500${value.poster_path}`} />
           <h4>{value.original_title}</h4>
         </div>
       ))}

@@ -1,24 +1,24 @@
 import { useState, useEffect } from "react";
 import Seo from "../components/Seo";
 
-function HomePage() {
-  const [movies, setMovies] = useState([]);
+function HomePage({ results }) {
+  // const [movies, setMovies] = useState([]);
 
-  const fetchMovie = async () => {
-    const { results } = await (await fetch("/api/movies")).json();
-    console.log(results);
-    setMovies(results);
-  };
+  // const fetchMovie = async () => {
+  //   const { results } = await (await fetch("/api/movies")).json();
+  //   console.log(results);
+  //   setMovies(results);
+  // };
 
-  useEffect(() => {
-    fetchMovie();
-  }, []);
+  // useEffect(() => {
+  //   fetchMovie();
+  // }, []);
 
   return (
     <div className="container">
       <Seo title={"Home"} />
-      {!movies && <h4>Loading...</h4>}
-      {movies?.map((value) => (
+      {!results && <h4>Loading...</h4>}
+      {results?.map((value) => (
         <div className="movie" key={value.id}>
           <img scr={`https://image.tmdb.org/t/p/w500${value.poster_path}`} />
           <h4>{value.original_title}</h4>
@@ -45,8 +45,22 @@ function HomePage() {
           text-align: center;
         }
       `}</style>
+      <img
+        scr={`https://image.tmdb.org/t/p/w500/6DrHO1jr3qVrViUO6s6kFiAGM7.jpg`}
+      />
     </div>
   );
 }
 
 export default HomePage;
+
+export async function getServerSideProps() {
+  const { results } = await (
+    await fetch("http://localhost:3000/api/movies")
+  ).json();
+  return {
+    props: {
+      results,
+    },
+  };
+}

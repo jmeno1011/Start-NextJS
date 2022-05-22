@@ -1,18 +1,11 @@
 import { useState, useEffect } from "react";
 import Seo from "../components/Seo";
 
-const API_KEY = "14148cd3a0084e4f63a132f8501e0ec1";
-
 function HomePage() {
   const [movies, setMovies] = useState([]);
 
   const fetchMovie = async () => {
-    const { results } = await (
-      await fetch(
-        `https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}`
-      )
-    ).json();
-    console.log("data::", results);
+    const { results } = await (await fetch("/api/movies")).json();
     setMovies(results);
   };
 
@@ -29,6 +22,27 @@ function HomePage() {
           <h4>{value.original_title}</h4>
         </div>
       ))}
+      <style jsx>{`
+        .container {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          padding: 20px;
+          gap: 20px;
+        }
+        .movie img {
+          max-width: 100%;
+          border-radius: 12px;
+          transition: transform 0.2s ease-in-out;
+          box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+        }
+        .movie:hover img {
+          transform: scale(1.05) translateY(-10px);
+        }
+        .movie h4 {
+          font-size: 18px;
+          text-align: center;
+        }
+      `}</style>
     </div>
   );
 }

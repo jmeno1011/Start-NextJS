@@ -1,27 +1,43 @@
+import Link from "next/link";
+import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
 import Seo from "../components/Seo";
 
 function HomePage({ results }) {
-  // const [movies, setMovies] = useState([]);
-
-  // const fetchMovie = async () => {
-  //   const { results } = await (await fetch("/api/movies")).json();
-  //   console.log(results);
-  //   setMovies(results);
-  // };
-
-  // useEffect(() => {
-  //   fetchMovie();
-  // }, []);
-  console.log(results);
+  const router = useRouter();
+  const onClick = (id, title) => {
+    router.push(
+      {
+        pathname: `/movies/${id}`,
+        query: {
+          id,
+          title,
+        },
+      },
+      `/movies/${id}`
+    );
+  };
   return (
     <div className="container">
       <Seo title={"Home"} />
       {!results && <h4>Loading...</h4>}
       {results?.map((value) => (
-        <div className="movie" key={value.id}>
+        <div
+          onClick={() => onClick(value.id, value.original_title)}
+          className="movie"
+          key={value.id}
+        >
           <img src={`https://image.tmdb.org/t/p/w500${value.poster_path}`} />
-          <h4>{value.original_title}</h4>
+          <h4>
+            <Link
+              href={{
+                pathname: `movies/${value.id}`,
+                query: { title: value.original_title },
+              }}
+            >
+              <a>{value.original_title}</a>
+            </Link>
+          </h4>
         </div>
       ))}
       <style jsx>{`

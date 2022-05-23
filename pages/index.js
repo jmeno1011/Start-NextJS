@@ -6,16 +6,7 @@ import Seo from "../components/Seo";
 function HomePage({ results }) {
   const router = useRouter();
   const onClick = (id, title) => {
-    router.push(
-      {
-        pathname: `/movies/${id}`,
-        query: {
-          id,
-          title,
-        },
-      },
-      `/movies/${id}`
-    );
+    router.push(`/movies/${title}/${id}`);
   };
   return (
     <div className="container">
@@ -29,12 +20,7 @@ function HomePage({ results }) {
         >
           <img src={`https://image.tmdb.org/t/p/w500${value.poster_path}`} />
           <h4>
-            <Link
-              href={{
-                pathname: `movies/${value.id}`,
-                query: { title: value.original_title },
-              }}
-            >
+            <Link href={`/movies/${value.original_title}/${value.id}`}>
               <a>{value.original_title}</a>
             </Link>
           </h4>
